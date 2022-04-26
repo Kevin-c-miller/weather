@@ -3,13 +3,11 @@ import axios from 'axios';
 const KEY = process.env.REACT_APP_WEATHER_KEY;
 const url = 'https://api.openweathermap.org';
 
-console.log(KEY);
-
 // get weather
-export const getWeather = async (lat: number, long: number) => {
+export const getWeather = async (lat: number, lon: number) => {
   try {
     const res = await axios.get(
-      `${url}/data/2.5/weather?lat=${lat}&lon=${long}&appid=${KEY}`
+      `${url}/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${KEY}`
     );
     return res.data;
   } catch (err) {
@@ -18,10 +16,10 @@ export const getWeather = async (lat: number, long: number) => {
 };
 
 // get more weather data (forecasts)
-export const getMoreWeather = async (lat: number, long: number) => {
+export const getMoreWeather = async (lat: number, lon: number) => {
   try {
     const res = await axios.get(
-      `${url}/data/2.5/onecall?lat=${lat}&lon=${long}&appid=${KEY}`
+      `${url}/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${KEY}`
     );
     return res.data;
   } catch (error) {
