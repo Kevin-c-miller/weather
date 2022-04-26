@@ -6,7 +6,7 @@ const url = 'https://api.openweathermap.org';
 console.log(KEY);
 
 // get weather
-export const getWeather = async (lat: string, long: string) => {
+export const getWeather = async (lat: number, long: number) => {
   try {
     const res = await axios.get(
       `${url}/data/2.5/weather?lat=${lat}&lon=${long}&appid=${KEY}`
@@ -18,7 +18,7 @@ export const getWeather = async (lat: string, long: string) => {
 };
 
 // get more weather data (forecasts)
-export const getMoreWeather = async (lat: string, long: string) => {
+export const getMoreWeather = async (lat: number, long: number) => {
   try {
     const res = await axios.get(
       `${url}/data/2.5/onecall?lat=${lat}&lon=${long}&appid=${KEY}`
