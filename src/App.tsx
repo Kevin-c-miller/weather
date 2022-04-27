@@ -2,21 +2,23 @@ import { useState, useEffect } from 'react';
 import { getWeather, getMoreWeather } from './services/apiConfig';
 import './App.css';
 import Location from './components/Location';
-import WeatherInfo from './components/WeatherInfo';
+import WeatherTemps from './components/WeatherTemps';
+import CurrentWeather from './components/CurrentWeather';
 
-interface Weather {
+interface DailyWeather {
   temp: number;
   feels_like: number;
   temp_max: number;
   temp_min: number;
 }
 
-function App() {
+const App = () => {
   const [lat, setLat] = useState(0);
   const [long, setLong] = useState(0);
-  const [location, setLocation] = useState('');
-  const [weather, setWeather] = useState({});
   const [additionalWeather, setAdditionalWeather] = useState({});
+  const [location, setLocation] = useState('');
+  const [dailyWeather, setDailyWeather] = useState({});
+  const [myWeather, setMyWeather] = useState({});
 
   // get user longitude and latitude
   const userLocation = () => {
@@ -34,16 +36,22 @@ function App() {
   const fetchWeatherData = async () => {
     const data = await getWeather(lat, long);
     const moreData = await getMoreWeather(lat, long);
+    console.log(data);
 
     if (lat !== 0 && long !== 0) {
       setLocation(data.name);
-      setWeather(data.main);
+      setDailyWeather(data.main);
+      setMyWeather(data.weather[0]);
       setAdditionalWeather(moreData);
     } else {
       userLocation();
+      setLocation(data.name);
+      setDailyWeather(data.main);
+      setAdditionalWeather(moreData);
     }
   };
-  console.log(typeof weather);
+  console.log(dailyWeather);
+  console.log(myWeather);
 
   useEffect(() => {
     userLocation();
@@ -54,8 +62,15 @@ function App() {
     <div className="App">
       <Location location={location} />
 
-      {/* <WeatherInfo weather={weather} /> */}
+      <WeatherTemps
+        temp={dailyWeather?.temp}
+        feelsLike={dailyWeather?.feels_like}
+        max={dailyWeather?.temp_max}
+        min={dailyWeather?.temp_min}
+      />
+
+      <CurrentWeather myWeather={myWeather} />
     </div>
   );
-}
+};
 export default App;
