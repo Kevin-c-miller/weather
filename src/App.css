@@ -14,7 +14,19 @@
 }
 
 .location {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.locationHeader {
   margin: 20px 0 10px 20px;
+}
+
+.longLat {
+  padding: 5px;
+  margin: 5px;
 }
 
 .alerts > button {
@@ -74,4 +86,28 @@
   justify-content: space-between;
   align-items: center;
   margin: 3rem;
+}
+
+.sunInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.sunInfo > h5 {
+  padding: 10px 10px 0;
+  margin: 10px 10px 0;
+}
+
+.sunInfoList {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  list-style-type: none;
+}
+.sunInfoList > p {
+  padding: 0 10px 10px 10px;
 }

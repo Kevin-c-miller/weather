@@ -7,11 +7,13 @@ import CurrentWeather from './components/CurrentWeather';
 import Forecast from './components/Forecast';
 import SunsetAndRise from './components/SunsetAndRise';
 import Alerts from './components/Alerts';
+import { TheForecast } from './forecast.model';
 
 const App = () => {
+  // TODO: move state to contextAPI
   const [lat, setLat] = useState(0);
   const [long, setLong] = useState(0);
-  const [additionalWeather, setAdditionalWeather] = useState({});
+  const [additionalWeather, setAdditionalWeather] = useState<TheForecast[]>([]);
   const [location, setLocation] = useState('');
   const [dailyWeather, setDailyWeather] = useState({
     temp: 0,
@@ -24,6 +26,10 @@ const App = () => {
     description: '',
     main: '',
   });
+  const [sunTime, setSunTime] = useState({
+    sunrise: 0,
+    sunset: 0,
+  });
 
   // get user longitude and latitude
   const userLocation = () => {
@@ -31,6 +37,7 @@ const App = () => {
       navigator.geolocation.getCurrentPosition((position) => {
         setLat(position.coords.latitude);
         setLong(position.coords.longitude);
+        // console.log(location);
       });
     } catch (err) {
       console.log(err);
@@ -43,20 +50,16 @@ const App = () => {
     const moreData = await getMoreWeather(lat, long);
     console.log(data);
 
-    if (lat !== 0 && long !== 0) {
-      setLocation(data.name);
-      setDailyWeather(data.main);
-      setMyWeather(data.weather[0]);
-      setAdditionalWeather(moreData);
-    } else {
-      userLocation();
-      setLocation(data.name);
-      setDailyWeather(data.main);
-      setAdditionalWeather(moreData);
-    }
+    setLocation(data.name);
+    setDailyWeather(data.main);
+    setMyWeather(data.weather[0]);
+    setAdditionalWeather(moreData.daily);
+    setSunTime(data.sys);
   };
 
   console.log(additionalWeather);
+  console.log(dailyWeather);
+  // console.log(location);
 
   useEffect(() => {
     userLocation();
@@ -66,10 +69,11 @@ const App = () => {
   return (
     <div className="App">
       <div className="header">
-        <Location location={location} />
+        <Location location={location} long={long} lat={lat} />
 
         <Alerts />
       </div>
+
       <div className="currentWeather">
         <WeatherTemps
           temp={dailyWeather?.temp}
@@ -86,8 +90,8 @@ const App = () => {
       </div>
 
       <div className="bottomOfPage">
-        <Forecast />
-        <SunsetAndRise />
+        <Forecast forecastWeather={additionalWeather} />
+        <SunsetAndRise sunrise={sunTime?.sunrise} sunset={sunTime?.sunset} />
       </div>
     </div>
   );
