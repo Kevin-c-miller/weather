@@ -1,10 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
+
 .App {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   min-height: 100vh;
   font-family: 'Source Code Pro', monospace, 'Courier New', Courier;
+  background-color: rgb(187, 244, 255);
 }
 
 .header {
@@ -108,6 +110,15 @@
   align-items: center;
   list-style-type: none;
 }
+
 .sunInfoList > p {
   padding: 0 10px 10px 10px;
+}
+
+.forecast {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
 }
