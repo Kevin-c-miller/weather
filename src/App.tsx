@@ -67,7 +67,6 @@ const App = () => {
   };
 
   console.log(additionalWeather);
-  console.log(dailyWeather);
   console.log(location);
 
   useEffect(() => {
