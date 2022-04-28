@@ -8,9 +8,10 @@ export default function Location({ location, long, lat }: Props) {
   return (
     <div className="location">
       <h1 className="locationHeader">{location}</h1>
-      <div>
+      <div className="longLat">
         <span>
-          Longitude: {long} | Latitude: {lat}
+          <strong>Longitude: </strong> {long} | <strong>Latitude: </strong>
+          {lat}
         </span>
       </div>
     </div>

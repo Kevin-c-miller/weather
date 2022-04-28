@@ -9,6 +9,7 @@ import SunsetAndRise from './components/SunsetAndRise';
 import Alerts from './components/Alerts';
 
 const App = () => {
+  // TODO: move state to contextAPI
   const [lat, setLat] = useState(0);
   const [long, setLong] = useState(0);
   const [additionalWeather, setAdditionalWeather] = useState({});
@@ -23,6 +24,10 @@ const App = () => {
     icon: '',
     description: '',
     main: '',
+  });
+  const [sunTime, setSunTime] = useState({
+    sunrise: 0,
+    sunset: 0,
   });
 
   // get user longitude and latitude
@@ -47,10 +52,12 @@ const App = () => {
     setDailyWeather(data.main);
     setMyWeather(data.weather[0]);
     setAdditionalWeather(moreData);
+    setSunTime(data.sys);
   };
 
   console.log(additionalWeather);
   console.log(dailyWeather);
+  console.log(location);
 
   useEffect(() => {
     userLocation();
@@ -82,7 +89,7 @@ const App = () => {
 
       <div className="bottomOfPage">
         <Forecast />
-        <SunsetAndRise />
+        <SunsetAndRise sunrise={sunTime.sunrise} sunset={sunTime.sunset} />
       </div>
     </div>
   );
