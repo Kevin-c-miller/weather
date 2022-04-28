@@ -1,8 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
 .App {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   min-height: 100vh;
+  font-family: 'Source Code Pro', monospace, 'Courier New', Courier;
+}
+
+.header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.location {
+  margin: 20px 0 10px 20px;
+}
+
+.alerts > button {
+  padding: 10px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 10px;
+  border: 0.5px solid #000;
+}
+
+.alerts > button:hover {
+  background: rgb(124, 124, 124);
 }
 
 .currentWeather {
@@ -11,6 +36,7 @@
   align-items: center;
   padding: 1rem;
   height: 350px;
+  margin: 3rem;
 }
 
 .weatherDescription,
@@ -27,10 +53,25 @@
   padding-top: 2rem;
 }
 
+.weatherTemps > ul {
+  list-style-type: none;
+}
+
+.weatherTemps > ul > li {
+  padding: 5px;
+}
+
 .weatherDescription {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
   height: 100%;
+}
+
+.bottomOfPage {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 3rem;
 }

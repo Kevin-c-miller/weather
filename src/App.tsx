@@ -65,11 +65,11 @@ const App = () => {
 
   return (
     <div className="App">
-      <Location location={location} />
+      <div className="header">
+        <Location location={location} />
 
-      <Alerts />
-      {/* TODO: add alerts button that bring up modal with info on current alerts / conditional render it if there is one populated or not */}
-
+        <Alerts />
+      </div>
       <div className="currentWeather">
         <WeatherTemps
           temp={dailyWeather?.temp}
@@ -84,8 +84,11 @@ const App = () => {
           main={myWeather.main}
         />
       </div>
-      <Forecast />
-      <SunsetAndRise />
+
+      <div className="bottomOfPage">
+        <Forecast />
+        <SunsetAndRise />
+      </div>
     </div>
   );
 };
