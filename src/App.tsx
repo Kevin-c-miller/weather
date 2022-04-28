@@ -43,20 +43,14 @@ const App = () => {
     const moreData = await getMoreWeather(lat, long);
     console.log(data);
 
-    if (lat !== 0 && long !== 0) {
-      setLocation(data.name);
-      setDailyWeather(data.main);
-      setMyWeather(data.weather[0]);
-      setAdditionalWeather(moreData);
-    } else {
-      userLocation();
-      setLocation(data.name);
-      setDailyWeather(data.main);
-      setAdditionalWeather(moreData);
-    }
+    setLocation(data.name);
+    setDailyWeather(data.main);
+    setMyWeather(data.weather[0]);
+    setAdditionalWeather(moreData);
   };
 
   console.log(additionalWeather);
+  console.log(dailyWeather);
 
   useEffect(() => {
     userLocation();
@@ -66,10 +60,11 @@ const App = () => {
   return (
     <div className="App">
       <div className="header">
-        <Location location={location} />
+        <Location location={location} long={long} lat={lat} />
 
         <Alerts />
       </div>
+
       <div className="currentWeather">
         <WeatherTemps
           temp={dailyWeather?.temp}

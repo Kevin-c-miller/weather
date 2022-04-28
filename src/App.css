@@ -14,6 +14,13 @@
 }
 
 .location {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.locationHeader {
   margin: 20px 0 10px 20px;
 }
 
