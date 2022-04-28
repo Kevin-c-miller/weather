@@ -11,12 +11,11 @@ const WeatherTemps = ({ temp, feelsLike, max, min }: WeatherProps) => {
     return +(1.8 * (kTemp - 273) + 32).toFixed(1);
   };
 
-  console.log(kelvinToFar(temp));
-
   return (
-    <div>
+    <div className="weatherTemps">
       <h2>
-        Current Temperature: {kelvinToFar(temp)} <span>&deg;F</span>
+        {/* TODO: add and onclick here somehwere to toggle between F and Celcius, can do all at once to make it easy */}
+        Current: {kelvinToFar(temp)} <span>&deg;F</span>
       </h2>
       <ul>
         <li>

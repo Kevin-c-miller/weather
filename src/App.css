@@ -2,4 +2,35 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  min-height: 100vh;
+}
+
+.currentWeather {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  height: 350px;
+}
+
+.weatherDescription,
+.weatherTemps {
+  margin: 0 2.5rem;
+}
+
+.weatherTemps {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+  padding-top: 2rem;
+}
+
+.weatherDescription {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%;
 }

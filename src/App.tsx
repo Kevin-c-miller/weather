@@ -4,6 +4,9 @@ import './App.css';
 import Location from './components/Location';
 import WeatherTemps from './components/WeatherTemps';
 import CurrentWeather from './components/CurrentWeather';
+import Forecast from './components/Forecast';
+import SunsetAndRise from './components/SunsetAndRise';
+import Alerts from './components/Alerts';
 
 const App = () => {
   const [lat, setLat] = useState(0);
@@ -52,8 +55,8 @@ const App = () => {
       setAdditionalWeather(moreData);
     }
   };
-  console.log(dailyWeather);
-  console.log(myWeather);
+
+  console.log(additionalWeather);
 
   useEffect(() => {
     userLocation();
@@ -64,18 +67,25 @@ const App = () => {
     <div className="App">
       <Location location={location} />
 
-      <WeatherTemps
-        temp={dailyWeather?.temp}
-        feelsLike={dailyWeather?.feels_like}
-        max={dailyWeather?.temp_max}
-        min={dailyWeather?.temp_min}
-      />
+      <Alerts />
+      {/* TODO: add alerts button that bring up modal with info on current alerts / conditional render it if there is one populated or not */}
 
-      <CurrentWeather
-        description={myWeather.description}
-        icon={myWeather.icon}
-        main={myWeather.main}
-      />
+      <div className="currentWeather">
+        <WeatherTemps
+          temp={dailyWeather?.temp}
+          feelsLike={dailyWeather?.feels_like}
+          max={dailyWeather?.temp_max}
+          min={dailyWeather?.temp_min}
+        />
+
+        <CurrentWeather
+          description={myWeather.description}
+          icon={myWeather.icon}
+          main={myWeather.main}
+        />
+      </div>
+      <Forecast />
+      <SunsetAndRise />
     </div>
   );
 };
