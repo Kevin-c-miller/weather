@@ -4,6 +4,9 @@ import './App.css';
 import Location from './components/Location';
 import WeatherTemps from './components/WeatherTemps';
 import CurrentWeather from './components/CurrentWeather';
+import Forecast from './components/Forecast';
+import SunsetAndRise from './components/SunsetAndRise';
+import Alerts from './components/Alerts';
 
 const App = () => {
   const [lat, setLat] = useState(0);
@@ -52,8 +55,8 @@ const App = () => {
       setAdditionalWeather(moreData);
     }
   };
-  console.log(dailyWeather);
-  console.log(myWeather);
+
+  console.log(additionalWeather);
 
   useEffect(() => {
     userLocation();
@@ -62,20 +65,30 @@ const App = () => {
 
   return (
     <div className="App">
-      <Location location={location} />
+      <div className="header">
+        <Location location={location} />
 
-      <WeatherTemps
-        temp={dailyWeather?.temp}
-        feelsLike={dailyWeather?.feels_like}
-        max={dailyWeather?.temp_max}
-        min={dailyWeather?.temp_min}
-      />
+        <Alerts />
+      </div>
+      <div className="currentWeather">
+        <WeatherTemps
+          temp={dailyWeather?.temp}
+          feelsLike={dailyWeather?.feels_like}
+          max={dailyWeather?.temp_max}
+          min={dailyWeather?.temp_min}
+        />
 
-      <CurrentWeather
-        description={myWeather.description}
-        icon={myWeather.icon}
-        main={myWeather.main}
-      />
+        <CurrentWeather
+          description={myWeather?.description}
+          icon={myWeather?.icon}
+          main={myWeather?.main}
+        />
+      </div>
+
+      <div className="bottomOfPage">
+        <Forecast />
+        <SunsetAndRise />
+      </div>
     </div>
   );
 };

@@ -8,7 +8,7 @@ interface CurrentWeatherProps {
 
 const CurrentWeather = ({ description, icon, main }: CurrentWeatherProps) => {
   return (
-    <div>
+    <div className="weatherDescription">
       <h5>{main}</h5>
       <img
         src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
