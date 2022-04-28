@@ -1,16 +1,12 @@
 import React from 'react';
 
 interface CurrentWeatherProps {
-  myWeather: {
-    description: string;
-    icon: string;
-    main: string;
-  };
+  description: string;
+  icon: string;
+  main: string;
 }
 
-const CurrentWeather = ({ myWeather }: CurrentWeatherProps) => {
-  const { description, icon, main } = myWeather;
-
+const CurrentWeather = ({ description, icon, main }: CurrentWeatherProps) => {
   return (
     <div>
       <h5>{main}</h5>

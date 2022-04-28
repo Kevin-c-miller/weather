@@ -5,20 +5,22 @@ import Location from './components/Location';
 import WeatherTemps from './components/WeatherTemps';
 import CurrentWeather from './components/CurrentWeather';
 
-interface DailyWeather {
-  temp: number;
-  feels_like: number;
-  temp_max: number;
-  temp_min: number;
-}
-
 const App = () => {
   const [lat, setLat] = useState(0);
   const [long, setLong] = useState(0);
   const [additionalWeather, setAdditionalWeather] = useState({});
   const [location, setLocation] = useState('');
-  const [dailyWeather, setDailyWeather] = useState({});
-  const [myWeather, setMyWeather] = useState({});
+  const [dailyWeather, setDailyWeather] = useState({
+    temp: 0,
+    feels_like: 0,
+    temp_max: 0,
+    temp_min: 0,
+  });
+  const [myWeather, setMyWeather] = useState({
+    icon: '',
+    description: '',
+    main: '',
+  });
 
   // get user longitude and latitude
   const userLocation = () => {
@@ -69,7 +71,11 @@ const App = () => {
         min={dailyWeather?.temp_min}
       />
 
-      <CurrentWeather myWeather={myWeather} />
+      <CurrentWeather
+        description={myWeather.description}
+        icon={myWeather.icon}
+        main={myWeather.main}
+      />
     </div>
   );
 };
