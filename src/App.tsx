@@ -79,9 +79,9 @@ const App = () => {
         />
 
         <CurrentWeather
-          description={myWeather.description}
-          icon={myWeather.icon}
-          main={myWeather.main}
+          description={myWeather?.description}
+          icon={myWeather?.icon}
+          main={myWeather?.main}
         />
       </div>
 
