@@ -31,6 +31,13 @@
   margin: 5px;
 }
 
+.alerts {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .alerts > button {
   padding: 10px;
   border: none;
@@ -44,6 +51,31 @@
   background: rgb(124, 124, 124);
 }
 
+.alertsModal,
+.myAlerts {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.alertsModal {
+  background-color: rgb(199, 255, 255);
+  border: 2px solid #000;
+  border-radius: 20px;
+  padding: 1rem;
+}
+
+.myAlerts > h5,
+p {
+  padding: 0;
+  margin: 10px;
+}
+
+.myAlerts > p {
+  line-height: 1.5;
+}
+
 .currentWeather {
   display: flex;
   justify-content: center;
@@ -51,6 +83,15 @@
   padding: 1rem;
   height: 350px;
   margin: 3rem;
+}
+
+.modalBtn {
+  margin-top: 10px;
+  background: rgb(255, 151, 151);
+  border-radius: 10px;
+  padding: 10px;
+  color: #000;
+  font-weight: bold;
 }
 
 .weatherDescription,

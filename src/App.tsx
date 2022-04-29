@@ -15,6 +15,11 @@ const App = () => {
   const [long, setLong] = useState(0);
   const [additionalWeather, setAdditionalWeather] = useState<TheForecast[]>([]);
   const [location, setLocation] = useState('');
+  const [alerts, setAlerts] = useState({
+    description: '',
+    event: '',
+    sender_name: '',
+  });
   const [dailyWeather, setDailyWeather] = useState({
     temp: 0,
     feels_like: 0,
@@ -44,9 +49,6 @@ const App = () => {
     }
   };
 
-  console.log(additionalWeather);
-  console.log(location);
-
   useEffect(() => {
     userLocation();
   }, []);
@@ -61,10 +63,11 @@ const App = () => {
 
         setLocation(data.name);
 
-        if (location === 'Globe' || location === null) {
+        if (!location || location === 'Globe') {
           userLocation();
         }
 
+        setAlerts(moreData.alerts[0]);
         setDailyWeather(data.main);
         setMyWeather(data.weather[0]);
         setAdditionalWeather(moreData.daily);
@@ -76,12 +79,19 @@ const App = () => {
     fetchWeatherData();
   }, [lat, location, long]);
 
+  console.log(additionalWeather);
+  console.log(alerts);
+
   return (
     <div className="App">
       <div className="header">
         <Location location={location} long={long} lat={lat} />
 
-        <Alerts />
+        <Alerts
+          description={alerts?.description}
+          sender={alerts?.sender_name}
+          event={alerts?.event}
+        />
       </div>
 
       <div className="currentWeather">
