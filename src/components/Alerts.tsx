@@ -29,7 +29,7 @@ const Alerts = ({ sender, event, description }: AlertsProps) => {
     setIsOpen(true);
   };
 
-  // cloase modal
+  // close modal
   const closeModal = () => {
     setIsOpen(false);
   };
