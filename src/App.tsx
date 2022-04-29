@@ -15,6 +15,11 @@ const App = () => {
   const [long, setLong] = useState(0);
   const [additionalWeather, setAdditionalWeather] = useState<TheForecast[]>([]);
   const [location, setLocation] = useState('');
+  const [alerts, setAlerts] = useState({
+    description: '',
+    event: '',
+    sender_name: '',
+  });
   const [dailyWeather, setDailyWeather] = useState({
     temp: 0,
     feels_like: 0,
@@ -44,42 +49,49 @@ const App = () => {
     }
   };
 
-  // get weather data for user location
-  const fetchWeatherData = async () => {
-    try {
-      const data = await getWeather(lat, long);
-      const moreData = await getMoreWeather(lat, long);
-      console.log(data);
-
-      setLocation(data.name);
-
-      if (location === 'Globe' || location === null) {
-        userLocation();
-      }
-
-      setDailyWeather(data.main);
-      setMyWeather(data.weather[0]);
-      setAdditionalWeather(moreData.daily);
-      setSunTime(data.sys);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  console.log(additionalWeather);
-  console.log(location);
-
   useEffect(() => {
     userLocation();
-    fetchWeatherData();
   }, []);
+
+  useEffect(() => {
+    // get weather data for user location
+    const fetchWeatherData = async () => {
+      try {
+        const data = await getWeather(lat, long);
+        const moreData = await getMoreWeather(lat, long);
+        console.log(data);
+
+        setLocation(data.name);
+
+        if (!location || location === 'Globe') {
+          userLocation();
+        }
+
+        setAlerts(moreData.alerts[0]);
+        setDailyWeather(data.main);
+        setMyWeather(data.weather[0]);
+        setAdditionalWeather(moreData.daily);
+        setSunTime(data.sys);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchWeatherData();
+  }, [lat, location, long]);
+
+  console.log(additionalWeather);
+  console.log(alerts);
 
   return (
     <div className="App">
       <div className="header">
         <Location location={location} long={long} lat={lat} />
 
-        <Alerts />
+        <Alerts
+          description={alerts?.description}
+          sender={alerts?.sender_name}
+          event={alerts?.event}
+        />
       </div>
 
       <div className="currentWeather">

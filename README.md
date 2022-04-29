@@ -11,6 +11,7 @@
 ## Dependencies
 
 - Axios
+- React-modal
 
 ## Wireframe
 
