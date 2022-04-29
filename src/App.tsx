@@ -44,35 +44,37 @@ const App = () => {
     }
   };
 
-  // get weather data for user location
-  const fetchWeatherData = async () => {
-    try {
-      const data = await getWeather(lat, long);
-      const moreData = await getMoreWeather(lat, long);
-      console.log(data);
-
-      setLocation(data.name);
-
-      if (location === 'Globe' || location === null) {
-        userLocation();
-      }
-
-      setDailyWeather(data.main);
-      setMyWeather(data.weather[0]);
-      setAdditionalWeather(moreData.daily);
-      setSunTime(data.sys);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   console.log(additionalWeather);
   console.log(location);
 
   useEffect(() => {
     userLocation();
-    fetchWeatherData();
   }, []);
+
+  useEffect(() => {
+    // get weather data for user location
+    const fetchWeatherData = async () => {
+      try {
+        const data = await getWeather(lat, long);
+        const moreData = await getMoreWeather(lat, long);
+        console.log(data);
+
+        setLocation(data.name);
+
+        if (location === 'Globe' || location === null) {
+          userLocation();
+        }
+
+        setDailyWeather(data.main);
+        setMyWeather(data.weather[0]);
+        setAdditionalWeather(moreData.daily);
+        setSunTime(data.sys);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchWeatherData();
+  }, [lat, location, long]);
 
   return (
     <div className="App">
