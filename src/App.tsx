@@ -8,6 +8,7 @@ import Forecast from './components/Forecast';
 import SunsetAndRise from './components/SunsetAndRise';
 import Alerts from './components/Alerts';
 import { TheForecast } from './forecast.model';
+import Footer from './components/Footer';
 
 const App = () => {
   // TODO: move state to contextAPI
@@ -55,17 +56,23 @@ const App = () => {
         const data = await getWeather(lat, long);
         const moreData = await getMoreWeather(lat, long);
         console.log(moreData);
-
         setLocation(data.name);
 
         if (location === 'Globe') {
           userLocation();
         } else {
-          // setAlerts(moreData.alerts[0]);
           setDailyWeather(data.main);
           setMyWeather(data.weather[0]);
           setAdditionalWeather(moreData.daily);
           setSunTime(data.sys);
+
+          if (moreData.alerts) {
+            setAlerts({
+              event: moreData.alerts.event,
+              description: moreData.alerts.description,
+              sender_name: moreData.alerts.sender_name,
+            });
+          }
         }
       } catch (err) {
         console.error(err);
@@ -113,6 +120,7 @@ const App = () => {
         <Forecast forecastWeather={additionalWeather} />
         <SunsetAndRise sunrise={sunTime?.sunrise} sunset={sunTime?.sunset} />
       </div>
+      <Footer />
     </div>
   );
 };
