@@ -21,44 +21,10 @@ interface ForecastProps {
 }
 
 const Forecast = ({ forecastWeather }: ForecastProps) => {
-  const [today, setToday] = useState(0);
-  const [tomorrow, setTomorrow] = useState({
-    dt: 0,
-    day: '',
-  });
-  const [daysOfWeek, setDaysOfWeek] = useState([
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-  ]);
-
   // converting kelvin to farenheit
   const kelvinToFar = (kTemp: number) => {
     return +(1.8 * (kTemp - 273) + 32).toFixed(1);
   };
-
-  useEffect(() => {
-    const weekday = () => {
-      let date = new Date();
-      let tomorrowDay = '';
-      setToday(date.getDay());
-
-      for (let i = 0; i < daysOfWeek.length; i++) {
-        if (today === i && today !== 6) tomorrowDay = daysOfWeek[today + 1];
-        if (today === 6) tomorrowDay = daysOfWeek[0];
-      }
-      setTomorrow({
-        dt: today !== 6 ? today + 1 : 0,
-        day: tomorrowDay,
-      });
-    };
-
-    weekday();
-  }, [daysOfWeek, today]);
 
   return (
     <div className="forecast">
@@ -66,7 +32,7 @@ const Forecast = ({ forecastWeather }: ForecastProps) => {
       {/* TODO: label each day in forecast with weekday name */}
       {forecastWeather.map((day, index) => (
         <div key={index} className="dailyForecast">
-          {tomorrow.day} | High:
+          | High:
           {kelvinToFar(day?.temp?.max).toFixed(0)}
           <span>&deg;F</span> | Low: {kelvinToFar(day?.temp?.min).toFixed(0)}
           <span>&deg;F</span>
