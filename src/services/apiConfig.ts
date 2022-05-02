@@ -11,7 +11,7 @@ export const getWeather = async (lat: number, lon: number) => {
     );
     return res.data;
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 };
 

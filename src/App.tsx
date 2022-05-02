@@ -42,16 +42,11 @@ const App = () => {
       navigator.geolocation.getCurrentPosition((position) => {
         setLat(position.coords.latitude);
         setLong(position.coords.longitude);
-        // console.log(location);
       });
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
-
-  useEffect(() => {
-    userLocation();
-  }, []);
 
   useEffect(() => {
     // get weather data for user location
@@ -59,28 +54,33 @@ const App = () => {
       try {
         const data = await getWeather(lat, long);
         const moreData = await getMoreWeather(lat, long);
-        console.log(data);
+        console.log(moreData);
 
         setLocation(data.name);
 
-        if (!location || location === 'Globe') {
+        if (location === 'Globe') {
           userLocation();
+        } else {
+          // setAlerts(moreData.alerts[0]);
+          setDailyWeather(data.main);
+          setMyWeather(data.weather[0]);
+          setAdditionalWeather(moreData.daily);
+          setSunTime(data.sys);
         }
-
-        setAlerts(moreData.alerts[0]);
-        setDailyWeather(data.main);
-        setMyWeather(data.weather[0]);
-        setAdditionalWeather(moreData.daily);
-        setSunTime(data.sys);
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     };
+
     fetchWeatherData();
   }, [lat, location, long]);
 
+  useEffect(() => {
+    userLocation();
+  }, []);
+
   console.log(additionalWeather);
-  console.log(alerts);
+  // console.log(alerts);
 
   return (
     <div className="App">
