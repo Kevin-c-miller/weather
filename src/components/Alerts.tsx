@@ -45,12 +45,18 @@ const Alerts = ({ sender, event, description }: AlertsProps) => {
         contentLabel="Alerts Modal"
       >
         <div className="alertsModal">
-          <div className="myAlerts">
-            <h3>{event}</h3>
-            <h4>From: {sender}</h4>
-            <h5>Details: </h5>
-            <p>{description}</p>
-          </div>
+          {sender && event && description ? (
+            <div className="myAlerts">
+              <h3>{event}</h3>
+              <h4>From: {sender}</h4>
+              <h5>Details: </h5>
+              <p>{description}</p>
+            </div>
+          ) : (
+            <div className="myAlerts">
+              <h4>No current alerts in your area</h4>
+            </div>
+          )}
 
           <button className="modalBtn" onClick={closeModal}>
             Close

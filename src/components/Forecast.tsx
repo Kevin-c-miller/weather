@@ -78,7 +78,7 @@ const Forecast = ({ forecastWeather }: ForecastProps) => {
 
 export default Forecast;
 
-// TODO: finishing rendeering data from api
+// TODO: finishing rendering data from api
 
 // daily.moon_phase Moon phase. 0 and 1 are 'new moon', 0.25 is 'first quarter moon', 0.5 is 'full moon' and 0.75 is 'last quarter moon'. The periods in between are called 'waxing crescent', 'waxing gibous', 'waning gibous', and 'waning crescent', respectively.
 // daily.pop Probability of precipitation. The values of the parameter vary between 0 and 1, where 0 is equal to 0%, 1 is equal to 100%
